@@ -17,7 +17,6 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import info.petershen.gnomeshooter.GnomeShooter;
 import info.petershen.gnomeshooter.screens.PlayScreen;
-import info.petershen.gnomeshooter.tools.AssetLoader;
 
 public class Player extends Sprite {
 
@@ -62,7 +61,7 @@ public class Player extends Sprite {
 		this.world = world;
 		definePlayer();
 		setBounds(0, 0, playerWidth / GnomeShooter.PPM, playerHeight / GnomeShooter.PPM);
-		setRegion(AssetLoader.astroJump1);
+		setRegion(screen.game.assets.astroJump1);
 
 	}
 
@@ -140,20 +139,20 @@ public class Player extends Sprite {
 		TextureRegion region;
 		switch (currentState) {
 		case JUMPING:
-			region = AssetLoader.astroJumpAnimation.getKeyFrame(stateTimer);
+			region = screen.game.assets.astroJumpAnimation.getKeyFrame(stateTimer);
 			break;
 		case RUNNINGFORWARD:
-			region = AssetLoader.astroWalkFAnimation.getKeyFrame(stateTimer, true);
+			region = screen.game.assets.astroWalkFAnimation.getKeyFrame(stateTimer, true);
 			break;
 		case RUNNINGBACKWARD:
-			region = AssetLoader.astroWalkBAnimation.getKeyFrame(stateTimer, true);
+			region = screen.game.assets.astroWalkBAnimation.getKeyFrame(stateTimer, true);
 			break;
 		case FALLING:
-			region = AssetLoader.astroJump2;
+			region = screen.game.assets.astroJump2;
 			break;
 		case STANDING:
 		default:
-			region = AssetLoader.astroJump1;
+			region = screen.game.assets.astroJump1;
 			break;
 
 		}

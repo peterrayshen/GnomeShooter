@@ -17,7 +17,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import info.petershen.gnomeshooter.GnomeShooter;
 import info.petershen.gnomeshooter.screens.PlayScreen;
 import info.petershen.gnomeshooter.sprites.Player.State;
-import info.petershen.gnomeshooter.tools.AssetLoader;
 
 public class Enemy extends Sprite {
 
@@ -49,7 +48,7 @@ public class Enemy extends Sprite {
 		defineEnemy();
 		setBounds(b2body.getPosition().x - 10 / GnomeShooter.PPM, b2body.getPosition().y - 26 / GnomeShooter.PPM,
 				30 / GnomeShooter.PPM, 45 / GnomeShooter.PPM);
-		setRegion(AssetLoader.gnomeWalk.getKeyFrame(stateTimer));
+		setRegion(screen.game.assets.gnomeWalk.getKeyFrame(stateTimer));
 
 	}
 
@@ -97,7 +96,7 @@ public class Enemy extends Sprite {
 		barWidth = health / 100 * this.getWidth();
 
 		stateTimer += delta;
-		setRegion(AssetLoader.gnomeWalk.getKeyFrame(stateTimer));
+		setRegion(screen.game.assets.gnomeWalk.getKeyFrame(stateTimer));
 
 		if (health <= 0) {
 			remove = true;

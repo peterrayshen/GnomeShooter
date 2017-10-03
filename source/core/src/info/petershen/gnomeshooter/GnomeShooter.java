@@ -2,14 +2,12 @@ package info.petershen.gnomeshooter;
 
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import info.petershen.gnomeshooter.screens.PlayScreen;
 import info.petershen.gnomeshooter.screens.ShopScreen;
-import info.petershen.gnomeshooter.tools.AssetLoader;
+import info.petershen.gnomeshooter.tools.AssetStorage;
 
 public class GnomeShooter extends Game {
 	
@@ -24,6 +22,8 @@ public class GnomeShooter extends Game {
 	public static final short ENEMY_INDEX = -2;
 	public static final short BOUNDARY_INDEX = -1;
 	
+	public AssetStorage assets;
+	
 	
 	public PlayScreen playScreen;
 	public ShopScreen shopScreen;
@@ -35,7 +35,8 @@ public class GnomeShooter extends Game {
 	public void create() {
 		
 		batch = new SpriteBatch();
-		AssetLoader.load();
+		
+		assets = new AssetStorage();
 		
 		playScreen = new PlayScreen(this);
 		shopScreen = new ShopScreen(this);
@@ -45,6 +46,7 @@ public class GnomeShooter extends Game {
 		setScreen(playScreen);
 		
 	}
+
 
 	@Override
 	public void render() {

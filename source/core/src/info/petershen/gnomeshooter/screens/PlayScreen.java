@@ -47,7 +47,7 @@ public class PlayScreen implements Screen {
 	public static float leftMoveForce = -3.5f;
 	public static float rightMoveForce = 3.5f;
 
-	private GnomeShooter game;
+	public GnomeShooter game;
 	private OrthographicCamera gamecam;
 	private Hud hud;
 
@@ -124,6 +124,12 @@ public class PlayScreen implements Screen {
 		
 		weaponList = new ArrayList<WeaponBase>();
 		weaponList.add(pistol);
+		weaponList.add(smg);
+		weaponList.add(ak);
+		weaponList.add(machine);
+		weaponList.add(revolver);
+		weaponList.add(barret);
+		weaponList.add(shotgun);
 		
 		currentWeapon = weaponList.get(weaponIndex);
 		new B2WorldCreator(world, map);

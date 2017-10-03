@@ -6,7 +6,6 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import info.petershen.gnomeshooter.GnomeShooter;
 import info.petershen.gnomeshooter.screens.PlayScreen;
-import info.petershen.gnomeshooter.tools.AssetLoader;
 
 public class Revolver extends WeaponBase {
 
@@ -19,7 +18,7 @@ public class Revolver extends WeaponBase {
 
 
 		
-		this.reloadSound = AssetLoader.loadmed;
+		this.reloadSound = screen.game.assets.loadmed;
 
 		this.originX = 0;
 		this.originY = 3;
@@ -40,7 +39,7 @@ public class Revolver extends WeaponBase {
 		this.minDeviant = -5;
 		this.maxDeviant = 5;
 
-		this.region = AssetLoader.deagle;
+		this.region = screen.game.assets.deagle;
 		setRegion(region);
 		this.bulletOffRight = 4;
 		this.bulletOffLeft = -4;
@@ -59,13 +58,13 @@ public class Revolver extends WeaponBase {
 		this.circleBullets = true;
 		this.color = Color.LIGHT_GRAY;
 		
-		this.shotSound = AssetLoader.revShot;
+		this.shotSound = screen.game.assets.revShot;
 
 		this.flashYRight = -3;
 		this.flashYLeft = 3.5f;
 		this.muzzleHeight = 20;
 		this.muzzleWidth = 20;
-		this.muzzleFlash = AssetLoader.muzzleFlash;
+		this.muzzleFlash = screen.game.assets.muzzleFlash;
 		
 		this.isAuto = false;
 		

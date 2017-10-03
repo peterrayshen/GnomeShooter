@@ -10,7 +10,6 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import info.petershen.gnomeshooter.GnomeShooter;
 import info.petershen.gnomeshooter.screens.PlayScreen;
-import info.petershen.gnomeshooter.tools.AssetLoader;
 
 public class WeaponBase extends Sprite {
 
@@ -23,7 +22,8 @@ public class WeaponBase extends Sprite {
 	public float fireTimer, muzzleWidth, muzzleHeight, flashXLeft, flashYLeft, flashXRight, flashYRight;;
 
 	public int cost, clipsize, level;
-	public Sound shotSound = AssetLoader.pistolShot, reloadSound = AssetLoader.loadmed;
+	public Sound shotSound;
+	public Sound reloadSound;
 	public float originX, originY, posXOffset, posYOffset, gunWidth, gunHeight, fpRadius, fpxright, fpyright, fpxleft,
 			fpyleft, fireRate, bulletOffRight, bulletOffLeft;
 
@@ -37,6 +37,10 @@ public class WeaponBase extends Sprite {
 	public Color color;
 
 	public WeaponBase(World world, PlayScreen screen) {
+		
+		shotSound = screen.game.assets.pistolShot; 
+		reloadSound = screen.game.assets.loadmed;
+		
 		fireTimer = 0;
 		isShooting = false;
 		setBounds(screen.player.b2body.getWorldCenter().x + this.posXOffset / GnomeShooter.PPM,
@@ -48,7 +52,7 @@ public class WeaponBase extends Sprite {
 						+ originX / GnomeShooter.PPM,
 				(screen.arm.getY() * 150 + screen.arm.getOriginX() * 150 - this.getY() * 150) / GnomeShooter.PPM
 						+ originY / GnomeShooter.PPM);
-		this.flash = new MuzzleFlash(AssetLoader.muzzleFlash, 10, 10);
+		this.flash = new MuzzleFlash(screen.game.assets.muzzleFlash, 10, 10);
 	}
 
 	public void shoot() {
@@ -106,7 +110,7 @@ public class WeaponBase extends Sprite {
 		}
 		else if (clip == 0 && !reloading) {
 			this.isAuto = false;
-			AssetLoader.dryfire.play();
+			screen.game.assets.dryfire.play();
 		}
 
 	}

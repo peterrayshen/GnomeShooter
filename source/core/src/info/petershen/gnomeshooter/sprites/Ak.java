@@ -5,7 +5,6 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import info.petershen.gnomeshooter.GnomeShooter;
 import info.petershen.gnomeshooter.screens.PlayScreen;
-import info.petershen.gnomeshooter.tools.AssetLoader;
 
 public class Ak extends WeaponBase {
 
@@ -19,7 +18,7 @@ public class Ak extends WeaponBase {
 		this.world = world;
 		this.screen = screen;
 		
-		this.reloadSound = AssetLoader.loadmed;
+		this.reloadSound = screen.game.assets.loadmed;
 
 		this.originX = 0;
 		this.originY = 2;
@@ -40,7 +39,7 @@ public class Ak extends WeaponBase {
 		this.minDeviant = -4;
 		this.maxDeviant = 4;
 
-		this.region = AssetLoader.ak;
+		this.region = screen.game.assets.ak;
 		setRegion(region);
 		this.bulletOffRight = -4f;
 		this.bulletOffLeft = 3.5f;
@@ -62,12 +61,12 @@ public class Ak extends WeaponBase {
 		
 		this.muzzleHeight = 15;
 		this.muzzleWidth = 15;
-		this.muzzleFlash = AssetLoader.muzzleFlash;
+		this.muzzleFlash = screen.game.assets.muzzleFlash;
 		
 		this.flashYLeft = 2;
 		
 		this.flash = new MuzzleFlash(muzzleFlash, muzzleWidth, muzzleHeight);
-		this.shotSound = AssetLoader.machineShot;
+		this.shotSound = screen.game.assets.machineShot;
 		setBounds(screen.player.b2body.getWorldCenter().x + this.posXOffset / GnomeShooter.PPM,
 				screen.player.b2body.getWorldCenter().y + this.posYOffset / GnomeShooter.PPM, gunWidth / GnomeShooter.PPM,
 				gunHeight / GnomeShooter.PPM);

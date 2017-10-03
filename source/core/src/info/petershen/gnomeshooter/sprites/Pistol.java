@@ -6,7 +6,6 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import info.petershen.gnomeshooter.GnomeShooter;
 import info.petershen.gnomeshooter.screens.PlayScreen;
-import info.petershen.gnomeshooter.tools.AssetLoader;
 
 public class Pistol extends WeaponBase {
 
@@ -15,7 +14,7 @@ public class Pistol extends WeaponBase {
 		this.world = world;
 		this.screen = screen;
 
-		this.reloadSound = AssetLoader.loadshort;
+		this.reloadSound = screen.game.assets.loadshort;
 
 		this.originX = 1.5f;
 		this.originY = 0;
@@ -37,7 +36,7 @@ public class Pistol extends WeaponBase {
 		this.maxDeviant = 5;
 		this.cost = 1000;
 
-		this.region = AssetLoader.pistol1;
+		this.region = screen.game.assets.pistol1;
 		setRegion(region);
 		this.bulletOffRight = 4;
 		this.bulletOffLeft = -4;

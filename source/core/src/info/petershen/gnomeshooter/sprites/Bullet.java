@@ -15,7 +15,6 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import info.petershen.gnomeshooter.GnomeShooter;
 import info.petershen.gnomeshooter.screens.PlayScreen;
-import info.petershen.gnomeshooter.tools.AssetLoader;
 
 public class Bullet extends Sprite {
 
@@ -43,7 +42,7 @@ public class Bullet extends Sprite {
 	public Bullet(World world, float x, float y, float radians, PlayScreen screen, float damage, float speed,
 			float lifeTime, float health, float radius, float b2radius, Color color) {
 		this.screen = screen;
-		setRegion(AssetLoader.pistol1);
+		setRegion(screen.game.assets.pistol1);
 		this.world = world;
 		defineCircleBullet(x, y, radians);
 		this.speed = speed / GnomeShooter.PPM;
@@ -63,7 +62,7 @@ public class Bullet extends Sprite {
 	public Bullet(World world, float x, float y, float radians, PlayScreen screen, float damage, float speed,
 			float lifeTime, float health, float width, float height, float b2width, float b2height, Color color) {
 		this.screen = screen;
-		setRegion(AssetLoader.pistol1);
+		setRegion(screen.game.assets.pistol1);
 		this.world = world;
 		defineRectBullet(x, y, radians);
 		this.speed = speed / GnomeShooter.PPM;
@@ -88,7 +87,7 @@ public class Bullet extends Sprite {
 			float lifeTime, float health, float width, float height, float b2width, float b2height, Color color,
 			boolean isShotgun) {
 		this.screen = screen;
-		setRegion(AssetLoader.pistol1);
+		setRegion(screen.game.assets.pistol1);
 		this.world = world;
 		defineRectBullet(x, y, radians);
 		this.speed = speed / GnomeShooter.PPM;

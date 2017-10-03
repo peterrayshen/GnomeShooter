@@ -29,7 +29,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import info.petershen.gnomeshooter.screens.PlayScreen;
-import info.petershen.gnomeshooter.tools.AssetLoader;
 
 public class Hud implements Disposable {
 	public Stage stage;
@@ -53,8 +52,8 @@ public class Hud implements Disposable {
 		ammo = new Integer(screen.currentWeapon.ammo);
 		clip = new Integer(screen.currentWeapon.clip);
 
-		BitmapFont font = AssetLoader.size20;
-		BitmapFont fontbig = AssetLoader.size27;
+		BitmapFont font = screen.game.assets.size20;
+		BitmapFont fontbig = screen.game.assets.size27;
 		
 
 		this.screen = screen;
