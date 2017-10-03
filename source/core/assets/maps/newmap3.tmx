@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="90" height="13" tilewidth="32" tileheight="32" nextobjectid="11">
+ <tileset firstgid="1" name="grasstop" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="grasstop.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="2" name="Solid_brown.svg" tilewidth="32" tileheight="32" tilecount="3844" columns="62">
+  <image source="Solid_brown.svg.png" width="2000" height="2000"/>
+ </tileset>
+ <tileset firstgid="3846" name="Sky_Blue" tilewidth="32" tileheight="32" tilecount="768" columns="32">
+  <image source="Sky_Blue.png" width="1026" height="770"/>
+ </tileset>
+ <tileset firstgid="4614" name="Door2-1" tilewidth="32" tileheight="32" tilecount="96" columns="12">
+  <image source="Door2-1.png" width="384" height="256"/>
+ </tileset>
+ <layer name="bg" width="90" height="13">
+  <data encoding="base64" compression="zlib">
+   eJztwwEJAAAIA7A3MKgdzG4LQdhgXUmrqqqqPj7x4gL12i8b
+  </data>
+ </layer>
+ <layer name="fg" width="90" height="13">
+  <data encoding="base64" compression="zlib">
+   eJztz7sJACAMRVEtxS6FpHUJF3L/HcRKCVGwsboH0rwX/IQAAAAAAAB+quLnxcn3zOun9ph38d+gsnorm+x09pRMd/qvyn1HL3fY/ch8mQGupARK
+  </data>
+ </layer>
+ <objectgroup name="ground">
+  <object id="1" x="0" y="384" width="2880" height="32"/>
+ </objectgroup>
+ <objectgroup name="boundaries">
+  <object id="2" x="512" y="0" width="32" height="384"/>
+  <object id="3" x="2432" y="0" width="32" height="384"/>
+  <object id="4" x="544" y="0" width="1888" height="32"/>
+ </objectgroup>
+</map>

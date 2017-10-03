@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="65" height="13" tilewidth="32" tileheight="32" nextobjectid="8">
+ <tileset firstgid="1" name="grasstop" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="grasstop.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="2" name="Door2-1" tilewidth="32" tileheight="32" tilecount="96" columns="12">
+  <image source="Door2-1.png" width="384" height="256"/>
+ </tileset>
+ <tileset firstgid="98" name="Solid_brown.svg" tilewidth="32" tileheight="32" tilecount="3844" columns="62">
+  <image source="Solid_brown.svg.png" width="2000" height="2000"/>
+ </tileset>
+ <tileset firstgid="3942" name="Sky_Blue" tilewidth="32" tileheight="32" tilecount="768" columns="32">
+  <image source="Sky_Blue.png" width="1026" height="770"/>
+ </tileset>
+ <layer name="bg" width="65" height="13">
+  <data encoding="base64" compression="zlib">
+   eJztwwENAAAIA6A3MKRhX8sCRoCNTlJVVdXnxgOHLqVK
+  </data>
+ </layer>
+ <layer name="Tile Layer 1" width="65" height="13">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwSgYBaNgFGADskjYCIrN8KiXIFIMBFRIUItPHps5hMzDJm6EhJH9zTiKGQBWNAL4
+  </data>
+ </layer>
+ <objectgroup name="ground">
+  <object id="1" x="0" y="384" width="2080" height="32"/>
+ </objectgroup>
+ <objectgroup name="barriers">
+  <object id="6" x="160" y="0" width="32" height="384"/>
+  <object id="7" x="1888" y="0" width="32" height="384"/>
+ </objectgroup>
+</map>
