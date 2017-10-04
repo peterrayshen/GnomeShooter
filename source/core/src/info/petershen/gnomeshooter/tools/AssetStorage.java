@@ -1,7 +1,6 @@
 package info.petershen.gnomeshooter.tools;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
@@ -48,8 +47,7 @@ public class AssetStorage {
 
 	public BitmapFont size15, size20, size24, size27, size32, size38;
 
-
-	public AssetStorage() { 
+	public AssetStorage() {
 		loadAssets();
 	}
 
@@ -66,15 +64,13 @@ public class AssetStorage {
 		astroTexture = new Texture(Gdx.files.internal("textures/astronaut.png"));
 		flashTexture = new Texture(Gdx.files.internal("textures/muzzle_flash.png"));
 		gnomes = new Texture(Gdx.files.internal("textures/gnomes.png"));
-		
+
 		ground = new Texture(Gdx.files.internal("textures/ground.png"));
-		
+
 		gnome1 = new TextureRegion(gnomes, 35, 153, 71, 131);
 		gnome2 = new TextureRegion(gnomes, 169, 153, 71, 131);
 		gnome3 = new TextureRegion(gnomes, 303, 153, 71, 131);
-		
 
-		
 		pistolShot = Gdx.audio.newSound(Gdx.files.internal("sound_effects/pistol_shot.wav"));
 		akShot = Gdx.audio.newSound(Gdx.files.internal("sound_effects/ak.wav"));
 		barretShot = Gdx.audio.newSound(Gdx.files.internal("sound_effects/barret.wav"));
@@ -86,14 +82,11 @@ public class AssetStorage {
 		loadshort = Gdx.audio.newSound(Gdx.files.internal("sound_effects/loadshort.wav"));
 		loadmed = Gdx.audio.newSound(Gdx.files.internal("sound_effects/loadmed.wav"));
 		loadlong = Gdx.audio.newSound(Gdx.files.internal("sound_effects/loadlong.wav"));
-		
-		
-		
-		
+
 		bang = Gdx.audio.newSound(Gdx.files.internal("sound_effects/bang.wav"));
-		
+
 		money = Gdx.audio.newSound(Gdx.files.internal("sound_effects/money.wav"));
-		
+
 		gnome1 = new TextureRegion(gnomes, 35, 153, 71, 131);
 		gnome2 = new TextureRegion(gnomes, 169, 153, 71, 131);
 		gnome3 = new TextureRegion(gnomes, 303, 153, 71, 131);
@@ -164,7 +157,7 @@ public class AssetStorage {
 		gnomeWalk = new Animation<TextureRegion>(0.1f, gnomeFrames);
 		gnomeWalk.setPlayMode(Animation.PlayMode.LOOP);
 	}
-	
+
 	public void dispose() {
 		gunTexture.dispose();
 		astroTexture.dispose();
@@ -176,7 +169,7 @@ public class AssetStorage {
 		size27.dispose();
 		size32.dispose();
 		size38.dispose();
-		
+
 	}
 
 }

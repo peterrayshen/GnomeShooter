@@ -75,8 +75,6 @@ public class WorldContactListener implements ContactListener {
 			((Bullet) fixA.getUserData()).remove = true;
 		}
 
-		
-
 	}
 
 	@Override
@@ -127,6 +125,18 @@ public class WorldContactListener implements ContactListener {
 			contact.setEnabled(false);
 
 		}
+		
+		if (fixB.getUserData() instanceof Bullet && fixA.getUserData() instanceof Player) {
+
+			contact.setEnabled(false);
+
+		}
+
+		if (fixB.getUserData() instanceof Player && fixA.getUserData() instanceof Bullet) {
+
+			contact.setEnabled(false);
+
+		}
 
 		if (fixB.getUserData() instanceof Player && fixA.getUserData() instanceof Enemy) {
 
@@ -149,7 +159,6 @@ public class WorldContactListener implements ContactListener {
 			contact.setEnabled(false);
 		}
 
-		
 	}
 
 	@Override

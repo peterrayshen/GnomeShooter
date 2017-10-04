@@ -1,7 +1,6 @@
 package info.petershen.gnomeshooter.sprites;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -16,9 +15,12 @@ public class Shotgun extends WeaponBase {
 
 		super(world, screen);
 
+		this.initAmmo = 60;
+		this.initClip = 12;
+
 		this.world = world;
 		this.screen = screen;
-		
+
 		this.reloadSound = screen.game.assets.loadmed;
 
 		this.originX = 0;
@@ -33,8 +35,8 @@ public class Shotgun extends WeaponBase {
 		this.fpxleft = -8;
 		this.fpyleft = 30;
 		this.fireRate = 60;
-		this.clip = 12;
-		this.ammo = 60;
+		this.clip = initClip;
+		this.ammo = initAmmo;
 		this.clipsize = 12;
 		this.reloadTime = 1.7f;
 		this.minDeviant = -11;
@@ -71,8 +73,8 @@ public class Shotgun extends WeaponBase {
 		this.flash = new MuzzleFlash(muzzleFlash, muzzleWidth, muzzleHeight);
 		this.shotSound = screen.game.assets.shotgunShot;
 		setBounds(screen.player.b2body.getWorldCenter().x + this.posXOffset / GnomeShooter.PPM,
-				screen.player.b2body.getWorldCenter().y + this.posYOffset / GnomeShooter.PPM, gunWidth / GnomeShooter.PPM,
-				gunHeight / GnomeShooter.PPM);
+				screen.player.b2body.getWorldCenter().y + this.posYOffset / GnomeShooter.PPM,
+				gunWidth / GnomeShooter.PPM, gunHeight / GnomeShooter.PPM);
 
 		setOrigin(
 				(screen.arm.getX() * 150 + screen.arm.getOriginX() * 150 - this.getX() * 150) / GnomeShooter.PPM
@@ -99,10 +101,12 @@ public class Shotgun extends WeaponBase {
 										screen, bulletDamage, bulletSpeed, bulletLife, bulletHealth, bulletWidth,
 										bulletHeight, b2width, b2height, color, true));
 					else
-						screen.bullets.add(new Bullet(world, firePoint.x, firePoint.y + bulletOffLeft / GnomeShooter.PPM,
-								this.getRotation() * MathUtils.degreesToRadians + MathUtils.degreesToRadians * deviant,
-								screen, bulletDamage, bulletSpeed, bulletLife, bulletHealth, bulletWidth, bulletHeight,
-								b2width, b2height, color, true));
+						screen.bullets
+								.add(new Bullet(world, firePoint.x, firePoint.y + bulletOffLeft / GnomeShooter.PPM,
+										this.getRotation() * MathUtils.degreesToRadians
+												+ MathUtils.degreesToRadians * deviant,
+										screen, bulletDamage, bulletSpeed, bulletLife, bulletHealth, bulletWidth,
+										bulletHeight, b2width, b2height, color, true));
 				}
 				fireTimer = 0;
 				clip--;

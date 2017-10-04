@@ -5,16 +5,10 @@ import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -75,9 +69,7 @@ public class PlayScreen implements Screen {
 	public WeaponBase currentWeapon, pistol, smg, ak, machine, revolver, barret, shotgun;
 
 	public ArrayList<WeaponBase> weaponList;
-	
-	private AssetManager assetManager;
-	
+		
 	private Box2DDebugRenderer debugRenderer;
 	
 
@@ -96,8 +88,6 @@ public class PlayScreen implements Screen {
 
 		sr = new ShapeRenderer();
 		
-		assetManager = new AssetManager();
-
 		world = new World(new Vector2(0, gravity), true);
 		b2dr = new Box2DDebugRenderer();
 
@@ -265,11 +255,11 @@ public class PlayScreen implements Screen {
 
 		hud.stage.draw();
 		hud.update(delta);
+	 
+		checkIfLost();	
 
 		world.step(1 / 120f, 6, 2);
 		
-		if (player.health <= 0)
-			Gdx.app.exit();
 
 	}
 
@@ -310,6 +300,32 @@ public class PlayScreen implements Screen {
 	
 	public void openShop() {
 		game.setScreen(game.shopScreen);
+	}
+	
+	public void checkIfLost() {
+		if (player.health <- 0) {
+			game.setScreen(game.loseScreen);
+		}
+			
+	}
+	
+	public void restartGame() {
+		player.reset();
+		for (int i = 0; i < bullets.size(); i++) {
+			bullets.get(i).world.destroyBody(bullets.get(i).b2body);
+			bullets.remove(i);
+		}
+		for (int i = 0; i < enemies.size(); i++) {
+			enemies.get(i).world.destroyBody(enemies.get(i).b2body);
+			enemies.remove(i);
+		}
+		
+		roundController.reset();
+		
+		for (int i = 0; i < weaponList.size(); i++) {
+			weaponList.get(i).resetGame();
+		}
+		
 	}
 
 }

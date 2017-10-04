@@ -5,6 +5,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import info.petershen.gnomeshooter.screens.LoseScreen;
 import info.petershen.gnomeshooter.screens.PlayScreen;
 import info.petershen.gnomeshooter.screens.ShopScreen;
 import info.petershen.gnomeshooter.tools.AssetStorage;
@@ -27,6 +28,7 @@ public class GnomeShooter extends Game {
 	
 	public PlayScreen playScreen;
 	public ShopScreen shopScreen;
+	public LoseScreen loseScreen;
 	
 	public SpriteBatch batch;
 	Texture img;
@@ -39,10 +41,9 @@ public class GnomeShooter extends Game {
 		assets = new AssetStorage();
 		
 		playScreen = new PlayScreen(this);
-		shopScreen = new ShopScreen(this);
-		
+		shopScreen = new ShopScreen(this); 
+		loseScreen = new LoseScreen(batch, playScreen);
 	
-		
 		setScreen(playScreen);
 		
 	}

@@ -13,6 +13,9 @@ public class Barret extends WeaponBase {
 		this.world = world;
 		this.screen = screen;
 
+		this.initAmmo = 32;
+		this.initClip = 8;
+
 		this.reloadSound = screen.game.assets.loadlong;
 
 		this.originX = 0;
@@ -27,8 +30,8 @@ public class Barret extends WeaponBase {
 		this.fpxleft = -6;
 		this.fpyleft = 30;
 		this.fireRate = 350;
-		this.clip = 8;
-		this.ammo = 32;
+		this.clip = initClip;
+		this.ammo = initAmmo;
 		this.clipsize = 8;
 		this.reloadTime = 2.4f;
 		this.minDeviant = -1f;
@@ -64,8 +67,8 @@ public class Barret extends WeaponBase {
 		this.isAuto = false;
 
 		setBounds(screen.player.b2body.getWorldCenter().x + this.posXOffset / GnomeShooter.PPM,
-				screen.player.b2body.getWorldCenter().y + this.posYOffset / GnomeShooter.PPM, gunWidth / GnomeShooter.PPM,
-				gunHeight / GnomeShooter.PPM);
+				screen.player.b2body.getWorldCenter().y + this.posYOffset / GnomeShooter.PPM,
+				gunWidth / GnomeShooter.PPM, gunHeight / GnomeShooter.PPM);
 
 		setOrigin(
 				(screen.arm.getX() * 150 + screen.arm.getOriginX() * 150 - this.getX() * 150) / GnomeShooter.PPM

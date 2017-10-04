@@ -28,24 +28,19 @@ public class Bullet extends Sprite {
 
 	public float damage = 8;
 
-	private float speed;
 	public float health;
 	private float radius, height, width;
-	private float b2radius, b2height, b2width;
+	private float b2height, b2width;
 	private Color color;
 	private boolean isShotgun;
-
-	private PlayScreen screen;
 
 	public boolean remove, isCircle;
 
 	public Bullet(World world, float x, float y, float radians, PlayScreen screen, float damage, float speed,
 			float lifeTime, float health, float radius, float b2radius, Color color) {
-		this.screen = screen;
 		setRegion(screen.game.assets.pistol1);
 		this.world = world;
 		defineCircleBullet(x, y, radians);
-		this.speed = speed / GnomeShooter.PPM;
 		dx = MathUtils.cos(radians) * speed;
 		dy = MathUtils.sin(radians) * speed;
 		b2body.setLinearVelocity(dx, dy);
@@ -54,18 +49,15 @@ public class Bullet extends Sprite {
 		this.lifeTime = lifeTime;
 		this.health = health;
 		this.radius = radius;
-		this.b2radius = radius;
 		this.damage = damage;
 		isCircle = true;
 	}
 
 	public Bullet(World world, float x, float y, float radians, PlayScreen screen, float damage, float speed,
 			float lifeTime, float health, float width, float height, float b2width, float b2height, Color color) {
-		this.screen = screen;
 		setRegion(screen.game.assets.pistol1);
 		this.world = world;
 		defineRectBullet(x, y, radians);
-		this.speed = speed / GnomeShooter.PPM;
 		dx = MathUtils.cos(radians) * speed;
 		dy = MathUtils.sin(radians) * speed;
 
@@ -86,11 +78,9 @@ public class Bullet extends Sprite {
 	public Bullet(World world, float x, float y, float radians, PlayScreen screen, float damage, float speed,
 			float lifeTime, float health, float width, float height, float b2width, float b2height, Color color,
 			boolean isShotgun) {
-		this.screen = screen;
 		setRegion(screen.game.assets.pistol1);
 		this.world = world;
 		defineRectBullet(x, y, radians);
-		this.speed = speed / GnomeShooter.PPM;
 		dx = MathUtils.cos(radians) * speed;
 		dy = MathUtils.sin(radians) * speed;
 

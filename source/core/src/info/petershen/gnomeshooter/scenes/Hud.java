@@ -1,6 +1,5 @@
 package info.petershen.gnomeshooter.scenes;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -8,18 +7,13 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar.ProgressBarStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
@@ -32,10 +26,6 @@ public class Hud implements Disposable {
 	public Stage stage;
 	private Viewport viewport;
 	private Skin skin;
-
-	private Integer score;
-	private Integer round, clip, ammo;
-
 	Label scoreLabel;
 
 	Label levelLabel, healthLabel, clipLabel, ammoLabel, cashLabel, roundLabel;
@@ -47,8 +37,6 @@ public class Hud implements Disposable {
 	private ProgressBar bar;
 
 	public Hud(SpriteBatch sb, PlayScreen screen) {
-		ammo = new Integer(screen.currentWeapon.ammo);
-		clip = new Integer(screen.currentWeapon.clip);
 
 		BitmapFont font = screen.game.assets.size20;
 		BitmapFont fontbig = screen.game.assets.size27;
@@ -79,9 +67,6 @@ public class Hud implements Disposable {
 
 		bar.setValue(screen.player.health);
 		bar.setBounds(20, 415, 180, 30);
-
-		score = 0;
-		round = 1;
 
 		viewport = new FitViewport(800, 480, new OrthographicCamera());
 		stage = new Stage(viewport, sb);

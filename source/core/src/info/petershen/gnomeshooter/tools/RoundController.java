@@ -81,13 +81,21 @@ public class RoundController {
 		if (screen.player.b2body.getPosition().x < 10) {
 			spawnX = MathUtils.random(17f, 19f);
 			screen.enemies.add(new Enemy(screen, world, spawnX * GnomeShooter.PPM, 60, enemyHealth, enemyTurnSpeed, enemySpeed));
+			System.out.println("spawned");
 		}
 
 		else {
 			spawnX = MathUtils.random(2f, 3f);
 			screen.enemies.add(new Enemy(screen, world, spawnX * GnomeShooter.PPM, 60, enemyHealth, enemyTurnSpeed, enemySpeed));
-		}
+			System.out.println("spawned");
+		} 
 
+	}
+	
+	public void reset() {
+		round = 0;
+		runTime = 0;
+		startRound();
 	}
 	
 	
