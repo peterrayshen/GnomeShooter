@@ -192,8 +192,7 @@ public class WeaponBase extends Sprite {
 		if (ammo > 0 && !reloading) {
 			reloadSound.play();
 			reloading = true;
-			System.out.println("reload");
-		}
+		} 
 
 	}
 }

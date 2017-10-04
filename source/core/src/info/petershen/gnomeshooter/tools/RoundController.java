@@ -56,7 +56,6 @@ public class RoundController {
 				}
 
 				if (runTime > timeToSpawn) {
-					System.out.println("spawned enemy");
 					spawnEnemy();
 					enemiesSpawned++;
 					runTime = 0;

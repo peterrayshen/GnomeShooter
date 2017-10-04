@@ -1,6 +1,5 @@
 package info.petershen.gnomeshooter.sprites;
 
-import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;

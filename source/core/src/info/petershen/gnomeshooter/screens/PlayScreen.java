@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -46,14 +47,12 @@ public class PlayScreen implements Screen {
 	public static float jumpForce = 45f;
 	public static float leftMoveForce = -3.5f;
 	public static float rightMoveForce = 3.5f;
+	
+	private B2WorldCreator b2world;
 
 	public GnomeShooter game;
 	private OrthographicCamera gamecam;
 	private Hud hud;
-
-	private TmxMapLoader maploader;
-	private TiledMap map;
-	private OrthogonalTiledMapRenderer renderer;
 
 	private ShapeRenderer sr;
 
@@ -77,21 +76,16 @@ public class PlayScreen implements Screen {
 
 	public ArrayList<WeaponBase> weaponList;
 	
+	private AssetManager assetManager;
+	
+	private Box2DDebugRenderer debugRenderer;
+	
 
 	public final short GROUP_PLAYER = -1;
 
 	public PlayScreen(GnomeShooter game) {
 
-		
-		AssetManager assetManager = new AssetManager();
-		assetManager.load("songs/wicked.mp3", Music.class);
-		assetManager.finishLoading();
-		
-		Music music = assetManager.get("songs/wicked.mp3", Music.class);
-		music.setLooping(true);
-		music.setVolume(30);
-		music.play();
-		
+		debugRenderer = new Box2DDebugRenderer();
 		
 		bullets = new ArrayList<Bullet>();
 		enemies = new ArrayList<Enemy>();
@@ -101,11 +95,8 @@ public class PlayScreen implements Screen {
 		gamecam.translate(0, 16 / GnomeShooter.PPM);
 
 		sr = new ShapeRenderer();
-
-	
-		maploader = new TmxMapLoader();
-		map = maploader.load("maps/newmap3.tmx");
-		renderer = new OrthogonalTiledMapRenderer(map, 1 / GnomeShooter.PPM);
+		
+		assetManager = new AssetManager();
 
 		world = new World(new Vector2(0, gravity), true);
 		b2dr = new Box2DDebugRenderer();
@@ -132,7 +123,8 @@ public class PlayScreen implements Screen {
 		weaponList.add(shotgun);
 		
 		currentWeapon = weaponList.get(weaponIndex);
-		new B2WorldCreator(world, map);
+		
+		b2world = new B2WorldCreator(world, this);
 
 		world.setContactListener(new WorldContactListener(this));
 		
@@ -192,7 +184,6 @@ public class PlayScreen implements Screen {
 
 		gamecam.position.x = player.b2body.getPosition().x;
 		gamecam.update();
-		renderer.setView(gamecam);
 
 		player.update(delta);
 		arm.update(delta);
@@ -230,24 +221,19 @@ public class PlayScreen implements Screen {
 	public void render(float delta) {
 		update(delta);
 
-		Gdx.gl.glClearColor(0, 0, 0, 0);
+		Gdx.gl.glClearColor(135/255f, 206/255f, 250/255f, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		renderer.render();
 	
 
 		game.batch.setProjectionMatrix(gamecam.combined);
 
-		sr.setProjectionMatrix(gamecam.combined);
-		for (int i = 0; i < bullets.size(); i++) {
-			bullets.get(i).drawBullet(sr);
-		}
-
-		for (int i = 0; i < enemies.size(); i++) {
-			enemies.get(i).drawBar(sr);
-		}
+		
 
 		game.batch.begin();
+		for (int i = 0; i < b2world.ground.size(); i++) {
+			b2world.ground.get(i).draw(game.batch);
+		}
 		player.draw(game.batch);
 		arm.draw(game.batch);
 		currentWeapon.draw(game.batch);
@@ -259,6 +245,19 @@ public class PlayScreen implements Screen {
 			enemies.get(i).setColor(Color.WHITE);
 		}
 		game.batch.end();
+		
+		sr.setProjectionMatrix(gamecam.combined);
+		
+		for (int i = 0; i < enemies.size(); i++) {
+			enemies.get(i).drawBar(sr);
+		}
+		for (int i = 0; i < bullets.size(); i++) {
+			bullets.get(i).drawBullet(sr);
+		}
+
+		
+		
+		//debugRenderer.render(world, gamecam.combined);
 
 		currentWeapon.reset();
 
@@ -281,7 +280,7 @@ public class PlayScreen implements Screen {
 	}
 
 	@Override
-	public void pause() {
+	public void pause() { 
 		// TODO Auto-generated method stub
 
 	}
@@ -300,8 +299,7 @@ public class PlayScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		map.dispose(); 
-		renderer.dispose();
+
 		world.dispose();
 		b2dr.dispose();
 		hud.dispose();

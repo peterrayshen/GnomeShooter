@@ -1,5 +1,6 @@
 package info.petershen.gnomeshooter.tools;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -43,75 +44,55 @@ public class AssetStorage {
 			loadshort, loadmed, loadlong;
 	public Music future, wicked;
 
-	private Texture gnomes;
+	public Texture gnomes, ground;
 
 	public BitmapFont size15, size20, size24, size27, size32, size38;
 
-	private AssetManager manager;
 
-	public AssetStorage() {
+	public AssetStorage() { 
 		loadAssets();
 	}
 
 	public void loadAssets() {
 
-		manager = new AssetManager();
+		size15 = new BitmapFont(Gdx.files.internal("fonts/8bit15.fnt"));
+		size20 = new BitmapFont(Gdx.files.internal("fonts/8bit20.fnt"));
+		size24 = new BitmapFont(Gdx.files.internal("fonts/8bit24.fnt"));
+		size27 = new BitmapFont(Gdx.files.internal("fonts/8bit27.fnt"));
+		size32 = new BitmapFont(Gdx.files.internal("fonts/8bit32.fnt"));
+		size38 = new BitmapFont(Gdx.files.internal("fonts/8bit38.fnt"));
 
-		manager.load("fonts/8bit15.fnt", BitmapFont.class);
-		manager.load("fonts/8bit20.fnt", BitmapFont.class);
-		manager.load("fonts/8bit24.fnt", BitmapFont.class);
-		manager.load("fonts/8bit27.fnt", BitmapFont.class);
-		manager.load("fonts/8bit32.fnt", BitmapFont.class);
-		manager.load("fonts/8bit38.fnt", BitmapFont.class);
-
-		manager.load("textures/gun.gif", Texture.class);
-		manager.load("textures/astronaut.png", Texture.class);
-		manager.load("textures/muzzle_flash.png", Texture.class);
-		manager.load("textures/gnomes.png", Texture.class);
-
-		manager.load("sound_effects/pistol_shot.wav", Sound.class);
-		manager.load("sound_effects/ak.mp3", Sound.class);
-		manager.load("sound_effects/barret.mp3", Sound.class);
-		manager.load("sound_effects/revolver.mp3", Sound.class);
-		manager.load("sound_effects/smg.mp3", Sound.class);
-		manager.load("sound_effects/machine.mp3", Sound.class);
-		manager.load("sound_effects/shotgun.mp3", Sound.class);
-		manager.load("sound_effects/dryfire.mp3", Sound.class);
-		manager.load("sound_effects/loadshort.mp3", Sound.class);
-		manager.load("sound_effects/loadmed.mp3", Sound.class);
-		manager.load("sound_effects/loadlong.mp3", Sound.class);
-		manager.load("sound_effects/bang.wav", Sound.class);
-		manager.load("sound_effects/money.mp3", Sound.class);
-
-		manager.finishLoading();
+		gunTexture = new Texture(Gdx.files.internal("textures/gun.gif"));
+		astroTexture = new Texture(Gdx.files.internal("textures/astronaut.png"));
+		flashTexture = new Texture(Gdx.files.internal("textures/muzzle_flash.png"));
+		gnomes = new Texture(Gdx.files.internal("textures/gnomes.png"));
 		
-		System.out.println("finished loading");
+		ground = new Texture(Gdx.files.internal("textures/ground.png"));
+		
+		gnome1 = new TextureRegion(gnomes, 35, 153, 71, 131);
+		gnome2 = new TextureRegion(gnomes, 169, 153, 71, 131);
+		gnome3 = new TextureRegion(gnomes, 303, 153, 71, 131);
+		
 
-		size15 = manager.get("fonts/8bit15.fnt", BitmapFont.class);
-		size20 = manager.get("fonts/8bit20.fnt", BitmapFont.class);
-		size24 = manager.get("fonts/8bit24.fnt", BitmapFont.class);
-		size27 = manager.get("fonts/8bit27.fnt", BitmapFont.class);
-		size32 = manager.get("fonts/8bit32.fnt", BitmapFont.class);
-		size38 = manager.get("fonts/8bit38.fnt", BitmapFont.class);
-
-		gunTexture = manager.get("textures/gun.gif", Texture.class);
-		astroTexture = manager.get("textures/astronaut.png", Texture.class);
-		flashTexture = manager.get("textures/muzzle_flash.png", Texture.class);
-		gnomes = manager.get("textures/gnomes.png", Texture.class);
-
-		pistolShot = manager.get("sound_effects/pistol_shot.wav", Sound.class);
-		akShot = manager.get("sound_effects/ak.mp3", Sound.class);
-		barretShot = manager.get("sound_effects/barret.mp3", Sound.class);
-		revShot = manager.get("sound_effects/revolver.mp3", Sound.class);
-		smgShot = manager.get("sound_effects/smg.mp3", Sound.class);
-		machineShot = manager.get("sound_effects/machine.mp3", Sound.class);
-		shotgunShot = manager.get("sound_effects/shotgun.mp3", Sound.class);
-		dryfire = manager.get("sound_effects/dryfire.mp3", Sound.class);
-		loadshort = manager.get("sound_effects/loadshort.mp3", Sound.class);
-		loadmed = manager.get("sound_effects/loadmed.mp3", Sound.class);
-		loadlong = manager.get("sound_effects/loadlong.mp3", Sound.class);
-		bang = manager.get("sound_effects/bang.wav", Sound.class);
-		money = manager.get("sound_effects/money.mp3", Sound.class);
+		
+		pistolShot = Gdx.audio.newSound(Gdx.files.internal("sound_effects/pistol_shot.wav"));
+		akShot = Gdx.audio.newSound(Gdx.files.internal("sound_effects/ak.wav"));
+		barretShot = Gdx.audio.newSound(Gdx.files.internal("sound_effects/barret.wav"));
+		revShot = Gdx.audio.newSound(Gdx.files.internal("sound_effects/revolver.wav"));
+		smgShot = Gdx.audio.newSound(Gdx.files.internal("sound_effects/smg.wav"));
+		machineShot = Gdx.audio.newSound(Gdx.files.internal("sound_effects/machine.wav"));
+		shotgunShot = Gdx.audio.newSound(Gdx.files.internal("sound_effects/shotgun.wav"));
+		dryfire = Gdx.audio.newSound(Gdx.files.internal("sound_effects/dryfire.wav"));
+		loadshort = Gdx.audio.newSound(Gdx.files.internal("sound_effects/loadshort.wav"));
+		loadmed = Gdx.audio.newSound(Gdx.files.internal("sound_effects/loadmed.wav"));
+		loadlong = Gdx.audio.newSound(Gdx.files.internal("sound_effects/loadlong.wav"));
+		
+		
+		
+		
+		bang = Gdx.audio.newSound(Gdx.files.internal("sound_effects/bang.wav"));
+		
+		money = Gdx.audio.newSound(Gdx.files.internal("sound_effects/money.wav"));
 		
 		gnome1 = new TextureRegion(gnomes, 35, 153, 71, 131);
 		gnome2 = new TextureRegion(gnomes, 169, 153, 71, 131);
@@ -185,7 +166,6 @@ public class AssetStorage {
 	}
 	
 	public void dispose() {
-		manager.dispose();
 		gunTexture.dispose();
 		astroTexture.dispose();
 		gnomes.dispose();

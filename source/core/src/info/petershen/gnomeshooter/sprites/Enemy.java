@@ -108,8 +108,7 @@ public class Enemy extends Sprite {
 
 	}
 
-	public void drawBar(ShapeRenderer sr) {
-
+	public void drawBar(ShapeRenderer sr) { 
 		sr.begin(ShapeType.Filled);
 		sr.setColor(Color.RED);
 		sr.rect(b2body.getPosition().x - 16 / GnomeShooter.PPM, b2body.getPosition().y + 25 / GnomeShooter.PPM, barWidth,
