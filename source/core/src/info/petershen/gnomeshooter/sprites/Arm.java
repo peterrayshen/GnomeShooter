@@ -6,7 +6,6 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import info.petershen.gnomeshooter.GnomeShooter;
 import info.petershen.gnomeshooter.screens.PlayScreen;
-import info.petershen.gnomeshooter.tools.AssetLoader;
 
 public class Arm extends Sprite {
 
@@ -18,7 +17,7 @@ public class Arm extends Sprite {
 		setBounds(screen.player.b2body.getWorldCenter().x - 4 / GnomeShooter.PPM,
 				screen.player.b2body.getWorldCenter().y - 10 / GnomeShooter.PPM, 16 / GnomeShooter.PPM,
 				13 / GnomeShooter.PPM);
-		setRegion(AssetLoader.arm);
+		setRegion(screen.game.assets.arm);
 		setOrigin(4 / GnomeShooter.PPM, 5 / GnomeShooter.PPM);
 
 	}

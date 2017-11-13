@@ -10,9 +10,10 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import info.petershen.gnomeshooter.GnomeShooter;
 import info.petershen.gnomeshooter.screens.PlayScreen;
-import info.petershen.gnomeshooter.tools.AssetLoader;
 
 public class WeaponBase extends Sprite {
+
+	public int initClip, initAmmo;
 
 	public TextureRegion region, muzzleFlash;
 	public PlayScreen screen;
@@ -23,7 +24,8 @@ public class WeaponBase extends Sprite {
 	public float fireTimer, muzzleWidth, muzzleHeight, flashXLeft, flashYLeft, flashXRight, flashYRight;;
 
 	public int cost, clipsize, level;
-	public Sound shotSound = AssetLoader.pistolShot, reloadSound = AssetLoader.loadmed;
+	public Sound shotSound;
+	public Sound reloadSound;
 	public float originX, originY, posXOffset, posYOffset, gunWidth, gunHeight, fpRadius, fpxright, fpyright, fpxleft,
 			fpyleft, fireRate, bulletOffRight, bulletOffLeft;
 
@@ -37,18 +39,22 @@ public class WeaponBase extends Sprite {
 	public Color color;
 
 	public WeaponBase(World world, PlayScreen screen) {
+
+		shotSound = screen.game.assets.pistolShot;
+		reloadSound = screen.game.assets.loadmed;
+
 		fireTimer = 0;
 		isShooting = false;
 		setBounds(screen.player.b2body.getWorldCenter().x + this.posXOffset / GnomeShooter.PPM,
-				screen.player.b2body.getWorldCenter().y + this.posYOffset / GnomeShooter.PPM, gunWidth / GnomeShooter.PPM,
-				gunHeight / GnomeShooter.PPM);
+				screen.player.b2body.getWorldCenter().y + this.posYOffset / GnomeShooter.PPM,
+				gunWidth / GnomeShooter.PPM, gunHeight / GnomeShooter.PPM);
 
 		setOrigin(
 				(screen.arm.getX() * 150 + screen.arm.getOriginX() * 150 - this.getX() * 150) / GnomeShooter.PPM
 						+ originX / GnomeShooter.PPM,
 				(screen.arm.getY() * 150 + screen.arm.getOriginX() * 150 - this.getY() * 150) / GnomeShooter.PPM
 						+ originY / GnomeShooter.PPM);
-		this.flash = new MuzzleFlash(AssetLoader.muzzleFlash, 10, 10);
+		this.flash = new MuzzleFlash(screen.game.assets.muzzleFlash, 10, 10);
 	}
 
 	public void shoot() {
@@ -59,9 +65,12 @@ public class WeaponBase extends Sprite {
 					isShooting = true;
 					shotSound.play();
 					if (region.isFlipY())
-						screen.bullets.add(new Bullet(world, firePoint.x, firePoint.y + bulletOffLeft / GnomeShooter.PPM,
-								this.getRotation() * MathUtils.degreesToRadians + MathUtils.degreesToRadians * deviant,
-								screen, bulletDamage, bulletSpeed, bulletLife, bulletHealth, radius, b2radius, color));
+						screen.bullets
+								.add(new Bullet(world, firePoint.x, firePoint.y + bulletOffLeft / GnomeShooter.PPM,
+										this.getRotation() * MathUtils.degreesToRadians
+												+ MathUtils.degreesToRadians * deviant,
+										screen, bulletDamage, bulletSpeed, bulletLife, bulletHealth, radius, b2radius,
+										color));
 					else
 						screen.bullets
 								.add(new Bullet(world, firePoint.x, firePoint.y + bulletOffRight / GnomeShooter.PPM,
@@ -89,10 +98,12 @@ public class WeaponBase extends Sprite {
 										screen, bulletDamage, bulletSpeed, bulletLife, bulletHealth, bulletWidth,
 										bulletHeight, b2width, b2height, color));
 					else
-						screen.bullets.add(new Bullet(world, firePoint.x, firePoint.y + bulletOffLeft / GnomeShooter.PPM,
-								this.getRotation() * MathUtils.degreesToRadians + MathUtils.degreesToRadians * deviant,
-								screen, bulletDamage, bulletSpeed, bulletLife, bulletHealth, bulletWidth, bulletHeight,
-								b2width, b2height, color));
+						screen.bullets
+								.add(new Bullet(world, firePoint.x, firePoint.y + bulletOffLeft / GnomeShooter.PPM,
+										this.getRotation() * MathUtils.degreesToRadians
+												+ MathUtils.degreesToRadians * deviant,
+										screen, bulletDamage, bulletSpeed, bulletLife, bulletHealth, bulletWidth,
+										bulletHeight, b2width, b2height, color));
 					fireTimer = 0;
 					if (clip > 0)
 						clip--;
@@ -103,10 +114,9 @@ public class WeaponBase extends Sprite {
 				}
 
 			}
-		}
-		else if (clip == 0 && !reloading) {
+		} else if (clip == 0 && !reloading) {
 			this.isAuto = false;
-			AssetLoader.dryfire.play();
+			screen.game.assets.dryfire.play();
 		}
 
 	}
@@ -122,8 +132,8 @@ public class WeaponBase extends Sprite {
 			if (reloadTimer >= reloadTime) {
 				reloading = false;
 				int prevAmmo = ammo;
-				
-					ammo -= clipsize - clip;
+
+				ammo -= clipsize - clip;
 				if (ammo < 0)
 					ammo = 0;
 				if (prevAmmo >= clipsize)
@@ -160,7 +170,8 @@ public class WeaponBase extends Sprite {
 					getY() + getOriginY() + ((float) (fpRadius) * MathUtils.sin(
 							(this.getRotation() * MathUtils.degreesToRadians) + MathUtils.atan2(fpxright, fpyright))
 							/ GnomeShooter.PPM));
-			flash.setPosition(firePoint.x + flashXRight / GnomeShooter.PPM, firePoint.y + flashYRight / GnomeShooter.PPM);
+			flash.setPosition(firePoint.x + flashXRight / GnomeShooter.PPM,
+					firePoint.y + flashYRight / GnomeShooter.PPM);
 			flash.setRotation(this.getRotation());
 
 		} else {
@@ -188,8 +199,12 @@ public class WeaponBase extends Sprite {
 		if (ammo > 0 && !reloading) {
 			reloadSound.play();
 			reloading = true;
-			System.out.println("reload");
 		}
 
+	}
+
+	public void resetGame() {
+		clip = initClip;
+		ammo = initAmmo;
 	}
 }

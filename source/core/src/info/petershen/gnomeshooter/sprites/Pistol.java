@@ -1,12 +1,10 @@
 package info.petershen.gnomeshooter.sprites;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.World;
 
 import info.petershen.gnomeshooter.GnomeShooter;
 import info.petershen.gnomeshooter.screens.PlayScreen;
-import info.petershen.gnomeshooter.tools.AssetLoader;
 
 public class Pistol extends WeaponBase {
 
@@ -15,7 +13,10 @@ public class Pistol extends WeaponBase {
 		this.world = world;
 		this.screen = screen;
 
-		this.reloadSound = AssetLoader.loadshort;
+		this.initAmmo = 48;
+		this.initClip = 12;
+
+		this.reloadSound = screen.game.assets.loadshort;
 
 		this.originX = 1.5f;
 		this.originY = 0;
@@ -29,15 +30,15 @@ public class Pistol extends WeaponBase {
 		this.fpxleft = -7;
 		this.fpyleft = 25;
 		this.fireRate = 575;
-		this.clip = 12;
-		this.ammo = 48;
+		this.clip = initClip;
+		this.ammo = initAmmo;
 		this.clipsize = 12;
 		this.reloadTime = 1;
 		this.minDeviant = -5;
 		this.maxDeviant = 5;
 		this.cost = 1000;
 
-		this.region = AssetLoader.pistol1;
+		this.region = screen.game.assets.pistol1;
 		setRegion(region);
 		this.bulletOffRight = 4;
 		this.bulletOffLeft = -4;
@@ -58,8 +59,8 @@ public class Pistol extends WeaponBase {
 		this.isAuto = false;
 
 		setBounds(screen.player.b2body.getWorldCenter().x + this.posXOffset / GnomeShooter.PPM,
-				screen.player.b2body.getWorldCenter().y + this.posYOffset / GnomeShooter.PPM, gunWidth / GnomeShooter.PPM,
-				gunHeight / GnomeShooter.PPM);
+				screen.player.b2body.getWorldCenter().y + this.posYOffset / GnomeShooter.PPM,
+				gunWidth / GnomeShooter.PPM, gunHeight / GnomeShooter.PPM);
 
 		setOrigin(
 				(screen.arm.getX() * 150 + screen.arm.getOriginX() * 150 - this.getX() * 150) / GnomeShooter.PPM
@@ -69,5 +70,4 @@ public class Pistol extends WeaponBase {
 
 	}
 
-	
 }

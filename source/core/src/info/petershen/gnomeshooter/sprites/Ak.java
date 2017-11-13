@@ -5,21 +5,21 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import info.petershen.gnomeshooter.GnomeShooter;
 import info.petershen.gnomeshooter.screens.PlayScreen;
-import info.petershen.gnomeshooter.tools.AssetLoader;
 
 public class Ak extends WeaponBase {
-
 
 	boolean circleBullets = false;
 
 	public Ak(World world, PlayScreen screen) {
 		super(world, screen);
-		
-		
+
+		this.initAmmo = 120;
+		this.initClip = 30;
+
 		this.world = world;
 		this.screen = screen;
-		
-		this.reloadSound = AssetLoader.loadmed;
+
+		this.reloadSound = screen.game.assets.loadmed;
 
 		this.originX = 0;
 		this.originY = 2;
@@ -33,14 +33,14 @@ public class Ak extends WeaponBase {
 		this.fpxleft = -10;
 		this.fpyleft = 25;
 		this.fireRate = 650;
-		this.clip = 30;
-		this.ammo = 120;
+		this.clip = initClip;
+		this.ammo = initAmmo;
 		this.clipsize = 30;
 		this.reloadTime = 1.7f;
 		this.minDeviant = -4;
 		this.maxDeviant = 4;
 
-		this.region = AssetLoader.ak;
+		this.region = screen.game.assets.ak;
 		setRegion(region);
 		this.bulletOffRight = -4f;
 		this.bulletOffLeft = 3.5f;
@@ -57,28 +57,26 @@ public class Ak extends WeaponBase {
 
 		this.circleBullets = false;
 		this.color = Color.WHITE;
-		
+
 		this.isAuto = true;
-		
+
 		this.muzzleHeight = 15;
 		this.muzzleWidth = 15;
-		this.muzzleFlash = AssetLoader.muzzleFlash;
-		
+		this.muzzleFlash = screen.game.assets.muzzleFlash;
+
 		this.flashYLeft = 2;
-		
+
 		this.flash = new MuzzleFlash(muzzleFlash, muzzleWidth, muzzleHeight);
-		this.shotSound = AssetLoader.machineShot;
+		this.shotSound = screen.game.assets.machineShot;
 		setBounds(screen.player.b2body.getWorldCenter().x + this.posXOffset / GnomeShooter.PPM,
-				screen.player.b2body.getWorldCenter().y + this.posYOffset / GnomeShooter.PPM, gunWidth / GnomeShooter.PPM,
-				gunHeight / GnomeShooter.PPM);
-		
+				screen.player.b2body.getWorldCenter().y + this.posYOffset / GnomeShooter.PPM,
+				gunWidth / GnomeShooter.PPM, gunHeight / GnomeShooter.PPM);
+
 		setOrigin(
 				(screen.arm.getX() * 150 + screen.arm.getOriginX() * 150 - this.getX() * 150) / GnomeShooter.PPM
 						+ originX / GnomeShooter.PPM,
 				(screen.arm.getY() * 150 + screen.arm.getOriginX() * 150 - this.getY() * 150) / GnomeShooter.PPM
 						+ originY / GnomeShooter.PPM);
-		
-		
 
 	}
 }

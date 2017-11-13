@@ -5,7 +5,6 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import info.petershen.gnomeshooter.GnomeShooter;
 import info.petershen.gnomeshooter.screens.PlayScreen;
-import info.petershen.gnomeshooter.tools.AssetLoader;
 
 public class Barret extends WeaponBase {
 
@@ -14,7 +13,10 @@ public class Barret extends WeaponBase {
 		this.world = world;
 		this.screen = screen;
 
-		this.reloadSound = AssetLoader.loadlong;
+		this.initAmmo = 32;
+		this.initClip = 8;
+
+		this.reloadSound = screen.game.assets.loadlong;
 
 		this.originX = 0;
 		this.originY = 5;
@@ -28,14 +30,14 @@ public class Barret extends WeaponBase {
 		this.fpxleft = -6;
 		this.fpyleft = 30;
 		this.fireRate = 350;
-		this.clip = 8;
-		this.ammo = 32;
+		this.clip = initClip;
+		this.ammo = initAmmo;
 		this.clipsize = 8;
 		this.reloadTime = 2.4f;
 		this.minDeviant = -1f;
 		this.maxDeviant = 1;
 
-		this.region = AssetLoader.barret;
+		this.region = screen.game.assets.barret;
 		setRegion(region);
 		this.bulletOffRight = -4;
 		this.bulletOffLeft = 4;
@@ -49,13 +51,13 @@ public class Barret extends WeaponBase {
 		this.b2radius = 0;
 		this.b2width = 8;
 		this.b2height = 5;
-		this.shotSound = AssetLoader.barretShot;
+		this.shotSound = screen.game.assets.barretShot;
 		this.circleBullets = false;
 		this.color = Color.WHITE;
 
 		this.muzzleHeight = 25;
 		this.muzzleWidth = 35;
-		this.muzzleFlash = AssetLoader.muzzleFlash;
+		this.muzzleFlash = screen.game.assets.muzzleFlash;
 
 		this.flashYLeft = 9;
 		this.flashYRight = -9;
@@ -65,8 +67,8 @@ public class Barret extends WeaponBase {
 		this.isAuto = false;
 
 		setBounds(screen.player.b2body.getWorldCenter().x + this.posXOffset / GnomeShooter.PPM,
-				screen.player.b2body.getWorldCenter().y + this.posYOffset / GnomeShooter.PPM, gunWidth / GnomeShooter.PPM,
-				gunHeight / GnomeShooter.PPM);
+				screen.player.b2body.getWorldCenter().y + this.posYOffset / GnomeShooter.PPM,
+				gunWidth / GnomeShooter.PPM, gunHeight / GnomeShooter.PPM);
 
 		setOrigin(
 				(screen.arm.getX() * 150 + screen.arm.getOriginX() * 150 - this.getX() * 150) / GnomeShooter.PPM

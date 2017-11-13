@@ -2,11 +2,8 @@ package info.petershen.gnomeshooter.sprites;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -16,8 +13,6 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import info.petershen.gnomeshooter.GnomeShooter;
 import info.petershen.gnomeshooter.screens.PlayScreen;
-import info.petershen.gnomeshooter.sprites.Player.State;
-import info.petershen.gnomeshooter.tools.AssetLoader;
 
 public class Enemy extends Sprite {
 
@@ -49,7 +44,7 @@ public class Enemy extends Sprite {
 		defineEnemy();
 		setBounds(b2body.getPosition().x - 10 / GnomeShooter.PPM, b2body.getPosition().y - 26 / GnomeShooter.PPM,
 				30 / GnomeShooter.PPM, 45 / GnomeShooter.PPM);
-		setRegion(AssetLoader.gnomeWalk.getKeyFrame(stateTimer));
+		setRegion(screen.game.assets.gnomeWalk.getKeyFrame(stateTimer));
 
 	}
 
@@ -67,8 +62,6 @@ public class Enemy extends Sprite {
 		fdef.density = 120;
 		fdef.filter.groupIndex = GnomeShooter.ENEMY_INDEX;
 		b2body.createFixture(fdef).setUserData(this);
-	
-
 
 		MassData mdata = new MassData();
 		mdata.mass = 10000 / GnomeShooter.PPM;
@@ -97,7 +90,7 @@ public class Enemy extends Sprite {
 		barWidth = health / 100 * this.getWidth();
 
 		stateTimer += delta;
-		setRegion(AssetLoader.gnomeWalk.getKeyFrame(stateTimer));
+		setRegion(screen.game.assets.gnomeWalk.getKeyFrame(stateTimer));
 
 		if (health <= 0) {
 			remove = true;
@@ -110,16 +103,14 @@ public class Enemy extends Sprite {
 	}
 
 	public void drawBar(ShapeRenderer sr) {
-
 		sr.begin(ShapeType.Filled);
 		sr.setColor(Color.RED);
-		sr.rect(b2body.getPosition().x - 16 / GnomeShooter.PPM, b2body.getPosition().y + 25 / GnomeShooter.PPM, barWidth,
-				3.5f / GnomeShooter.PPM);
+		sr.rect(b2body.getPosition().x - 16 / GnomeShooter.PPM, b2body.getPosition().y + 25 / GnomeShooter.PPM,
+				barWidth, 3.5f / GnomeShooter.PPM);
 		sr.end();
 	}
 
 	public void updateMovement(float delta) {
-		
 
 		if (b2body.getLinearVelocity().x > 0) {
 			goingRight = true;

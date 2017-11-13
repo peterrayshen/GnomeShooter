@@ -1,16 +1,12 @@
 package info.petershen.gnomeshooter.sprites;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.World;
 
 import info.petershen.gnomeshooter.GnomeShooter;
 import info.petershen.gnomeshooter.screens.PlayScreen;
-import info.petershen.gnomeshooter.tools.AssetLoader;
 
 public class MachineGun extends WeaponBase {
-
-
 
 	public MachineGun(World world, PlayScreen screen) {
 
@@ -18,8 +14,10 @@ public class MachineGun extends WeaponBase {
 		this.world = world;
 		this.screen = screen;
 
-		
-		this.reloadSound = AssetLoader.loadlong;
+		this.initAmmo = 300;
+		this.initClip = 100;
+
+		this.reloadSound = screen.game.assets.loadlong;
 
 		this.originX = 0;
 		this.originY = 3.5f;
@@ -33,14 +31,14 @@ public class MachineGun extends WeaponBase {
 		this.fpxleft = -2;
 		this.fpyleft = 7;
 		this.fireRate = 600;
-		this.clip = 100;
-		this.ammo = 300;
+		this.clip = initClip;
+		this.ammo = initAmmo;
 		this.reloadTime = 2.4f;
 		this.clipsize = 100;
 		this.minDeviant = -4;
 		this.maxDeviant = 4;
-		
-		this.region = AssetLoader.chain;
+
+		this.region = screen.game.assets.chain;
 		setRegion(region);
 		this.bulletOffRight = -4;
 		this.bulletOffLeft = 4;
@@ -57,24 +55,24 @@ public class MachineGun extends WeaponBase {
 
 		this.circleBullets = false;
 		this.color = Color.DARK_GRAY;
-		
+
 		this.muzzleHeight = 22;
 		this.muzzleWidth = 22;
-		this.muzzleFlash = AssetLoader.muzzleFlash;
-		
+		this.muzzleFlash = screen.game.assets.muzzleFlash;
+
 		this.flashYLeft = 6;
 		this.flashYRight = -2;
-		
+
 		this.flash = new MuzzleFlash(muzzleFlash, muzzleWidth, muzzleHeight);
-		
+
 		this.isAuto = true;
-		
-		this.shotSound = AssetLoader.akShot;
-		
+
+		this.shotSound = screen.game.assets.akShot;
+
 		setBounds(screen.player.b2body.getWorldCenter().x + this.posXOffset / GnomeShooter.PPM,
-				screen.player.b2body.getWorldCenter().y + this.posYOffset / GnomeShooter.PPM, gunWidth / GnomeShooter.PPM,
-				gunHeight / GnomeShooter.PPM);
-		
+				screen.player.b2body.getWorldCenter().y + this.posYOffset / GnomeShooter.PPM,
+				gunWidth / GnomeShooter.PPM, gunHeight / GnomeShooter.PPM);
+
 		setOrigin(
 				(screen.arm.getX() * 150 + screen.arm.getOriginX() * 150 - this.getX() * 150) / GnomeShooter.PPM
 						+ originX / GnomeShooter.PPM,
